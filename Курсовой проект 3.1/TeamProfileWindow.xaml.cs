@@ -16,6 +16,10 @@ namespace Курсовой_проект_3._1
 
         List<PlayerInTeamList> teamList = new List<PlayerInTeamList>();
 
+        List<Achievement> achievementList = new List<Achievement>();
+        List<string> tournamentIds = new List<string>();
+        int offsetAchievment = 0;
+
         public TeamProfileWindow(string teamId)
         {
             InitializeComponent();
@@ -65,8 +69,8 @@ namespace Курсовой_проект_3._1
                 LoseCountTB.Text = loseCount.ToString() + " поражений";
 
                 WinPercentTB.Text = Math.Round(Convert.ToDouble(winCount) * 100.0 / Convert.ToDouble(gamesCount), 2).ToString() + "%";
-                DrawPercentTB.Text = Math.Round(Convert.ToDouble(drawCount) * 100 / Convert.ToDouble(gamesCount), 2).ToString() + "%";
-                LosePercentTB.Text = Math.Round(Convert.ToDouble(loseCount) * 100 / Convert.ToDouble(gamesCount), 2).ToString() + "%";
+                DrawPercentTB.Text = Math.Round(Convert.ToDouble(drawCount) * 100.0 / Convert.ToDouble(gamesCount), 2).ToString() + "%";
+                LosePercentTB.Text = Math.Round(Convert.ToDouble(loseCount) * 100.0 / Convert.ToDouble(gamesCount), 2).ToString() + "%";
             }
 
             // Подгрузка состава -- происходит в NowStatusRB_Checked
@@ -75,11 +79,25 @@ namespace Курсовой_проект_3._1
             // Подгрузка истории матчей
 
             // Подгрузка достижений
-            List<Achievement> achievementList = new List<Achievement>(3)
+            tournamentIds = GetTournamentIds(this.teamId);
+            int offsetInc = 0;
+            if (tournamentIds.Count > 5)
             {
-                new Achievement { Place="1", Tournament="The International 10 (2021)", Venue="Бухарест, Румыния", DateOfVenue="17.10.2021", Prize="18 000 000$", PrizeFond="40 000 000$"},
-                new Achievement { Place="7", Tournament="ESL One Summer 2021", Venue="Онлайн", DateOfVenue="20.07.2021", Prize="30 000$", PrizeFond="1 000 000$"},
-            };
+                for (int i = 0; i < 5; i++)
+                {
+                    achievementList.Add(GetAchievement(this.teamId, tournamentIds[i]));
+                    offsetInc++;
+                }
+            }
+            else
+            {
+                for (int i = 0; i < tournamentIds.Count; i++)
+                {
+                    achievementList.Add(GetAchievement(this.teamId, tournamentIds[i]));
+                    offsetInc++;
+                }
+            }
+            offsetAchievment += offsetInc;
             AchievementDataGrid.ItemsSource = achievementList;
         }
 
@@ -112,6 +130,76 @@ namespace Курсовой_проект_3._1
             TeamLB.ItemsSource = new List<string>();
             TeamLB.ItemsSource = teamList;
         }
+
+        private void MoreAchievementBtn_Click(object sender, RoutedEventArgs e)
+        {
+            if (tournamentIds.Count <= achievementList.Count)
+            {
+                MessageBox.Show("Больше достижений нет!");
+                return;
+            }
+
+            int offsetInc = 0;
+            if (tournamentIds.Count - achievementList.Count > 5)
+            {
+                for (int i = offsetAchievment; i < offsetAchievment + 5; i++)
+                {
+                    achievementList.Add(GetAchievement(this.teamId, tournamentIds[i]));
+                    offsetInc++;
+                }
+            }
+            else
+            {
+                for (int i = offsetAchievment; i < tournamentIds.Count - achievementList.Count + offsetAchievment; i++)
+                {
+                    achievementList.Add(GetAchievement(this.teamId, tournamentIds[i]));
+                    offsetInc++;
+                }
+            }
+            AchievementDataGrid.ItemsSource = new List<Achievement>();
+            AchievementDataGrid.ItemsSource = achievementList;
+            offsetAchievment += offsetInc;
+        }
+
+        // Возвращает список турниров, в котором участвовала команда
+        private List<string> GetTournamentIds(string teamId)
+        {
+            List<string> tournamentIds = new List<string>();
+
+            DataTable dt = query.SendSelectQuery("SELECT TournamentId FROM TournamentPlaces WHERE TeamId = " + teamId);
+            foreach (DataRow dr in dt.Rows)
+            {
+                tournamentIds.Add(dr[0].ToString());
+            }
+
+            return tournamentIds;
+        }
+
+        // Возвращает информацию (DataTable) о турнире
+        private DataTable GetTournamentInfo(string tournamentId)
+        {
+            return query.SendSelectQuery("SELECT * FROM Tournaments WHERE TournamentId = " + tournamentId);
+        }
+
+        // Возвращает место команды в турнире
+        private string GetPlaceInTournament(string tournamentId, string teamId)
+        {
+           
+            DataTable dt = query.SendSelectQuery("SELECT Place FROM TournamentPlaces WHERE TournamentId = " + tournamentId + " AND TeamId = " + teamId);
+
+            if (dt.Rows.Count > 0)
+            {
+                if (dt.Rows[0].IsNull(0))
+                {
+                    return null;
+                }
+
+                return dt.Rows[0][0].ToString();
+            }
+
+            return null;
+        }
+
 
         // Возвращает список всех игроков команды в настоящий момент
         private List<string> GetPlayerIdsInTeamPresent(string teamId)
@@ -364,8 +452,31 @@ namespace Курсовой_проект_3._1
 
             return player;
         }
+
+        // Возвращает объект класса Achievment
+        private Achievement GetAchievement(string teamId, string tournamentId)
+        {
+            Achievement achievement = new Achievement();
+            DataTable dt = GetTournamentInfo(tournamentId);
+
+            string place = GetPlaceInTournament(tournamentId, teamId);
+            if (place != "")
+            {
+                achievement.Place = GetPlaceInTournament(tournamentId, teamId);
+                achievement.Tournament = dt.Rows[0][1].ToString();
+                achievement.Venue = dt.Rows[0][4].ToString() + ",";
+                achievement.DateOfVenue = dt.Rows[0][2].ToString() + " - " + dt.Rows[0][3].ToString();
+                achievement.Place = place;
+                achievement.PrizeFond = dt.Rows[0][5].ToString();
+
+                return achievement;
+            }
+            else
+            {
+                return null;
+            }
+        }
     }
-}
 
     // Класс, описывающий объект/элемент ListBox - TeamListGroupBox
     public class PlayerInTeamList
@@ -388,3 +499,15 @@ namespace Курсовой_проект_3._1
         public string Prize { get; set; }
         public string PrizeFond { get; set; }
     }
+
+    // Класс, описывающий объект/элемент DataGrid - MatchesGrid
+    public class Match
+    {
+        public string FrstTeamName { get; set; }
+        public string ScndTeamName { get; set; }
+        public string Scores { get; set; }
+        public string GameDate { get; set; }
+        public string Tournament { get; set; }
+        public string WinTeam { get; set; }
+    }
+}
