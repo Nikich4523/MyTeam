@@ -1,0 +1,294 @@
+﻿<Window x:Class="Курсовой_проект_3._1.TournamentWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:uc="clr-namespace:Курсовой_проект_3._1.UserControls"
+        xmlns:local="clr-namespace:Курсовой_проект_3._1"
+        mc:Ignorable="d"
+        Title="TournamentWindow" Height="650" Width="1000" x:Name="MyWindow" WindowStartupLocation="CenterScreen">
+    <Window.Resources>
+        <!-- Grid styles -->
+        <Style TargetType="Grid">
+            <Setter Property="Background" Value="#fffff0"/>
+        </Style>
+        
+        <!-- Result List Box template -->
+        <DataTemplate x:Key="ResultLBTemplate">
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="0.3*"/>
+                    <ColumnDefinition Width="0.5*"/>
+                    <ColumnDefinition Width="0.5*"/>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="0.6*"/>
+                </Grid.ColumnDefinitions>
+                
+                <!-- Place -->
+                <TextBlock Text="{Binding Path=Place}" Grid.Column="0" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="18" FontWeight="SemiBold" Visibility="Visible"/>
+                <Image Source="{Binding Path=PlacePath}" Grid.Column="0" Margin="5" MaxHeight="30" Visibility="Visible"/>
+
+                <!-- Logo -->
+                <Image Grid.Column="1" Source="{Binding Path=LogoPath}" MaxHeight="120" MaxWidth="120" Margin="5"/>
+
+                <!-- CountryIcon, TeamName -->
+                <Grid Grid.Column="2" Grid.ColumnSpan="2">
+                    <Grid.RowDefinitions>
+                        <RowDefinition/>
+                        <RowDefinition/>
+                        <RowDefinition/>
+                    </Grid.RowDefinitions>
+
+                    <StackPanel Grid.Row="0" Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Center">
+                        <Image Source="{Binding Path=CountryIconPath}" MaxHeight="50" MaxWidth="50"/>
+                        <TextBlock Text="{Binding Path=TeamName}" FontSize="30" FontWeight="SemiBold" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                    </StackPanel>
+                </Grid>
+
+                <!-- Prize -->
+                <Viewbox Grid.Column="4" Stretch="Uniform" HorizontalAlignment="Left" Margin="40">
+                    <TextBlock Text="{Binding Path=Prize}" FontWeight="SemiBold"/>
+                </Viewbox>
+            </Grid>
+        </DataTemplate>
+
+        <!-- TextBlock styles -->
+        <Style TargetType="TextBox">
+            <Setter Property="VerticalAlignment" Value="Center"/>
+            
+            <!-- Border -->
+            <Setter Property="BorderThickness" Value="1 1 2 2"/>
+            <Setter Property="BorderBrush" Value="Black"/>
+        </Style>
+
+        <!-- Buttom style -->
+        <Style TargetType="Button">
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="Button">
+                        <Border CornerRadius="0"
+                                Background="{TemplateBinding Background}" x:Name="ButtonBorder">
+
+                            <ContentPresenter HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
+                                              VerticalAlignment="{TemplateBinding VerticalContentAlignment}"/>
+                        </Border>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsPressed" Value="True">
+                                <Setter Property="Background" TargetName="ButtonBorder">
+                                    <Setter.Value>
+                                        <RadialGradientBrush GradientOrigin="0.496,1.052">
+                                            <RadialGradientBrush.RelativeTransform>
+                                                <TransformGroup>
+                                                    <ScaleTransform CenterX="0.5" CenterY="0.5" ScaleX="1.5" ScaleY="1.5"/>
+                                                    <TranslateTransform X="0.02" Y="0.3"/>
+                                                </TransformGroup>
+                                            </RadialGradientBrush.RelativeTransform>
+                                            <GradientStop Color="#00000000" Offset="1"/>
+                                            <GradientStop Color="#FF303030" Offset="0.3"/>
+                                        </RadialGradientBrush>
+                                    </Setter.Value>
+                                </Setter>
+                            </Trigger>
+
+                            <Trigger Property="IsMouseOver" Value="True">
+                                <Setter Property="Background" Value="WhiteSmoke" TargetName="ButtonBorder">
+                                </Setter>
+                            </Trigger>
+
+                            <Trigger Property="IsEnabled" Value="False">
+                                <Setter Property="Background" TargetName="ButtonBorder">
+                                    <Setter.Value>
+                                        <RadialGradientBrush GradientOrigin="0.496,1.052">
+                                            <RadialGradientBrush.RelativeTransform>
+                                                <TransformGroup>
+                                                    <ScaleTransform CenterX="0.5" CenterY="0.5" ScaleX="1.5" ScaleY="1.5"/>
+                                                    <TranslateTransform X="0.02" Y="0.3"/>
+                                                </TransformGroup>
+                                            </RadialGradientBrush.RelativeTransform>
+                                            <GradientStop Color="#00000000" Offset="1"/>
+                                            <GradientStop Color="#FF303030" Offset="0.3"/>
+                                        </RadialGradientBrush>
+                                    </Setter.Value>
+                                </Setter>
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+    </Window.Resources>
+
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="0.1*"></RowDefinition>
+            <RowDefinition Height="0.05*"></RowDefinition>
+            <RowDefinition Height="*"></RowDefinition>
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition></ColumnDefinition>
+        </Grid.ColumnDefinitions>
+
+        <!-- Navigation -->
+        <Grid  Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="3" Background="#68A4C8">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition/>
+                <ColumnDefinition/>
+                <ColumnDefinition/>
+            </Grid.ColumnDefinitions>
+
+            <Border Grid.Column="0" BorderBrush="Black" BorderThickness="0 0 1 0">
+                <Button x:Name="ToMainBtn" Background="#68A4C8" Content="Главная" Foreground="White" FontSize="18" FontWeight="SemiBold" Style="{StaticResource NavigationBtnTemplate}" Click="ToMainBtn_Click"/>
+            </Border>
+
+            <Border Grid.Column="1" BorderBrush="Black" BorderThickness="0 0 1 0">
+                <Button x:Name="ToSearchBtn" Grid.Column="1" Background="#68A4C8" Content="Поиск" Foreground="White" FontSize="18" FontWeight="SemiBold" Style="{StaticResource NavigationBtnTemplate}" Click="ToSearchBtn_Click"/>
+            </Border>
+
+            <Border Grid.Column="2">
+                <Button x:Name="ToProfileBtn" Grid.Column="2" Background="#68A4C8" Content="Профиль" Foreground="White" FontSize="18" FontWeight="SemiBold" Style="{StaticResource NavigationBtnTemplate}" Click="ToProfileBtn_Click"/>
+            </Border>
+        </Grid>
+
+        <!-- BackStep -->
+        <StackPanel Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="3" Background="#81AEC8" Orientation="Horizontal"/>
+
+        <!-- MAIN -->
+        <ScrollViewer Grid.Row="2" Grid.Column="0">
+            <Grid Background="White">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="0.1*"/>
+                    <RowDefinition Height="0.01*" MaxHeight="2" MinHeight="2"/>
+                    <RowDefinition Height="0.1*"/>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                </Grid.RowDefinitions>
+
+                <!-- Tournament Name -->
+                <Grid Grid.Row="0" Background="White">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="1.8*"/>
+                        <ColumnDefinition Width="1.2*"/>
+                        <ColumnDefinition Width="0.2*"/>
+                        <ColumnDefinition Width="3*"/>
+                        <ColumnDefinition Width="1.8*"/>
+                    </Grid.ColumnDefinitions>
+
+                    <Grid Grid.Column="1" HorizontalAlignment="Right" Background="White">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="0.25*"/>
+                            <ColumnDefinition/>
+                        </Grid.ColumnDefinitions>
+
+                        <Image x:Name="DiciplineLogoImg" Source="C:\Users\nikich4523\source\repos\Курсовой проект 3.1\Курсовой проект 3.1\img\Default\discipline.png"/>
+                        <Viewbox Grid.Column="1" Stretch="Uniform" Margin="5 0 0 0">
+                            <TextBlock x:Name="DiciplineNameTB" Text="Game" FontWeight="Thin"/>
+                        </Viewbox>
+                    </Grid>
+
+                    <TextBlock Grid.Column="2" Text="|" VerticalAlignment="Center" HorizontalAlignment="Center" FontSize="18" Foreground="#FF68A4C8"/>
+
+                    <Viewbox Grid.Column="3" Stretch="Uniform" HorizontalAlignment="Left">
+                        <TextBlock x:Name="TournamentNameTB" Text="ESL One Summer 2021" FontWeight="Thin"/>
+                    </Viewbox>
+                </Grid>
+
+                <!-- Separator -->
+                <Rectangle Grid.Row="1" Fill="#FF68A4C8" Margin="10 0 10 0" RadiusX="3" RadiusY="3"/>
+
+                <!-- Tournament Info -->
+                <Grid Background="White" Grid.Row="2" Margin="0 5 0 0">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition MinWidth="150"/>
+                        <ColumnDefinition MinWidth="150"/>
+                        <ColumnDefinition MinWidth="100"/>
+                        <ColumnDefinition MinWidth="50"/>
+                        <ColumnDefinition MinWidth="50"/>
+                    </Grid.ColumnDefinitions>
+
+                    
+                    <!-- Name -->
+                    <Grid Grid.Column="0" HorizontalAlignment="Center" Background="White">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="0.8*"/>
+                            <ColumnDefinition/>
+                        </Grid.ColumnDefinitions>
+
+                        <TextBlock Grid.Column="0" FontWeight="SemiBold" VerticalAlignment="Center" TextAlignment="Center" Margin="0 0 6 0">Название <LineBreak/> турнира:</TextBlock>
+                        <TextBlock x:Name="TournamentShortNameTB" Grid.Column="2" TextWrapping="Wrap" Text="ESL One Summer 2021" TextAlignment="Center" VerticalAlignment="Center" HorizontalAlignment="Center"/>
+                    </Grid>
+
+                    <!-- Organizer -->
+                    <Grid Grid.Column="1" HorizontalAlignment="Center" Background="White">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="0.8*"/>
+                            <ColumnDefinition/>
+                        </Grid.ColumnDefinitions>
+
+                        <TextBlock Grid.Column="0" Text="Организатор:" FontWeight="SemiBold" VerticalAlignment="Center" Margin="0 0 5 0"/>
+                        <TextBlock x:Name="OrganizerTB" Grid.Column="2" TextWrapping="Wrap" Text="PGL" TextAlignment="Center" VerticalAlignment="Center" HorizontalAlignment="Center"/>
+                    </Grid>
+
+                    <!-- Venue -->
+                    <Grid Grid.Column="2" HorizontalAlignment="Center" Background="White">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="0.8*"/>
+                            <ColumnDefinition/>
+                        </Grid.ColumnDefinitions>
+
+                        <TextBlock Grid.Column="0" Margin="0 0 10 0" HorizontalAlignment="Center" VerticalAlignment="Center" TextAlignment="Center" FontWeight="SemiBold">Место <LineBreak/> проведения:</TextBlock>
+                        <TextBlock x:Name="VenueTB" Grid.Column="2" TextWrapping="Wrap" Text="Онлайн" TextAlignment="Center" VerticalAlignment="Center" HorizontalAlignment="Center"/>
+                    </Grid>
+
+                    <!-- Format -->
+                    <Grid Grid.Column="3" HorizontalAlignment="Center" Background="White">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="0.8*"/>
+                            <ColumnDefinition/>
+                        </Grid.ColumnDefinitions>
+
+                        <TextBlock Grid.Column="0" Text="Формат:" VerticalAlignment="Center" FontWeight="SemiBold" Margin="0 0 5 0"/>
+                        <TextBlock x:Name="FormatTB" Grid.Column="2" TextWrapping="Wrap" Text="Single Elimination" TextAlignment="Center" VerticalAlignment="Center" HorizontalAlignment="Center"/>
+                    </Grid>
+
+                    <!-- PrizeFond -->
+                    <Grid Grid.Column="4" HorizontalAlignment="Center" Background="White">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="0.8*"/>
+                            <ColumnDefinition/>
+                        </Grid.ColumnDefinitions>
+
+                        <TextBlock Grid.Column="0" Margin="0 0 10 0" HorizontalAlignment="Center" VerticalAlignment="Center" TextAlignment="Center" FontWeight="SemiBold">Сумма<LineBreak/>призовых:</TextBlock>
+                        <TextBlock x:Name="PrizeFondTB" Grid.Column="2" TextWrapping="Wrap" Text="40 000$" TextAlignment="Center" VerticalAlignment="Center" HorizontalAlignment="Center"/>
+                    </Grid>
+                </Grid>
+
+                <!-- TOURNAMENT BRACKET -->
+                <Border Grid.Row="3" BorderBrush="#FF68A4C8" BorderThickness="2" Margin="10" CornerRadius="1" MaxHeight="400">
+                    <ScrollViewer Background="WhiteSmoke">
+                        <Grid x:Name="MainGrid" Margin="0 20 0 20">
+                        </Grid>
+                    </ScrollViewer>
+                </Border>
+
+                <!-- Results -->
+                <GroupBox Grid.Row="4" MinHeight="100" Margin="300 10 300 10" BorderThickness="2" BorderBrush="#FF68A4C8">
+                    <GroupBox.Header>
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition/>
+                                <ColumnDefinition/>
+                            </Grid.ColumnDefinitions>
+
+                            <TextBlock Grid.Column="0" Text="Результаты: "/>
+                            <Button x:Name="AddResultBtn" Grid.Column="1" Content="+" FontSize="12" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Margin="1 3 1 3" MinWidth="20" Click="AddResultBtn_Click" Visibility="Collapsed"/>
+                        </Grid>
+                    </GroupBox.Header>
+                    
+                    <Grid>
+                        <ListBox x:Name="ResultLB" ItemTemplate="{StaticResource ResultLBTemplate}" HorizontalContentAlignment="Stretch" ScrollViewer.HorizontalScrollBarVisibility="Disabled" MouseDoubleClick="ResultLB_MouseDoubleClick"/>
+                    </Grid>
+                </GroupBox>
+            </Grid>
+        </ScrollViewer>
+    </Grid>
+</Window>

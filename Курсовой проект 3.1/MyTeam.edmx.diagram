@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="84c5c118ee6849e59fcdc2c8bbb5c2d6" Name="Diagram1">
+        <EntityTypeShape EntityType="MyTeamModel.Achievements" Width="1.5" PointX="8.25" PointY="7.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="MyTeamModel.Countries" Width="1.5" PointX="0.75" PointY="10.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="MyTeamModel.Disciplines" Width="1.5" PointX="3.75" PointY="7" IsExpanded="true" />
+        <EntityTypeShape EntityType="MyTeamModel.Matches" Width="1.5" PointX="8.25" PointY="14.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="MyTeamModel.PlayerApps" Width="1.5" PointX="8.25" PointY="10.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="MyTeamModel.sysdiagrams" Width="1.5" PointX="0.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="MyTeamModel.TeamApps" Width="1.5" PointX="5.25" PointY="18.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="MyTeamModel.Teams" Width="1.5" PointX="3" PointY="9.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="MyTeamModel.TeamsUsers" Width="1.5" PointX="11.25" PointY="10.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="MyTeamModel.TournamentFormats" Width="1.5" PointX="9" PointY="5" IsExpanded="true" />
+        <EntityTypeShape EntityType="MyTeamModel.Tournaments" Width="1.5" PointX="11.25" PointY="6" IsExpanded="true" />
+        <EntityTypeShape EntityType="MyTeamModel.Users" Width="1.5" PointX="6" PointY="9.375" IsExpanded="true" />
+        <AssociationConnector Association="MyTeamModel.FK_Achievements_Teams" ManuallyRouted="false" />
+        <AssociationConnector Association="MyTeamModel.FK_Achievements_Tournaments" ManuallyRouted="false" />
+        <AssociationConnector Association="MyTeamModel.FK_Teams_Countries" ManuallyRouted="false" />
+        <AssociationConnector Association="MyTeamModel.FK_Users_Countries" ManuallyRouted="false" />
+        <AssociationConnector Association="MyTeamModel.FK_Users_Disciplines" ManuallyRouted="false" />
+        <AssociationConnector Association="MyTeamModel.FK_Matches_Tournaments" ManuallyRouted="false" />
+        <AssociationConnector Association="MyTeamModel.FK_MatchesFrst_Teams" ManuallyRouted="false" />
+        <AssociationConnector Association="MyTeamModel.FK_MatchesScnd_Teams" ManuallyRouted="false" />
+        <AssociationConnector Association="MyTeamModel.FK_MatchesWinner_Teams" ManuallyRouted="false" />
+        <AssociationConnector Association="MyTeamModel.FK_PlayerApps_Users" ManuallyRouted="false" />
+        <AssociationConnector Association="MyTeamModel.FK_TeamApps_Users" ManuallyRouted="false" />
+        <AssociationConnector Association="MyTeamModel.FK_Teams_Users" ManuallyRouted="false" />
+        <AssociationConnector Association="MyTeamModel.FK_TeamsUsers_Teams" ManuallyRouted="false" />
+        <AssociationConnector Association="MyTeamModel.FK_TeamsUsers_Users" ManuallyRouted="false" />
+        <AssociationConnector Association="MyTeamModel.FK_Tournaments_TournamentFormats" ManuallyRouted="false" />
+        <AssociationConnector Association="MyTeamModel.FK_Tournaments_Users" ManuallyRouted="false" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

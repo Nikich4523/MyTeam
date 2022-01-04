@@ -1,0 +1,246 @@
+﻿<Window x:Class="Курсовой_проект_3._1.Windows.SearchWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Курсовой_проект_3._1.Windows"
+        mc:Ignorable="d"
+        Title="Поиск" Height="450" Width="700" ResizeMode="NoResize" WindowStartupLocation="CenterScreen">
+    <Window.Resources>
+        <!-- Diffrent templates for the ApplicationList (Players, Teams, Tournaments) -->
+        <DataTemplate x:Key="PlayersItemTemplate">
+            <Grid MinHeight="100">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="0.6*"/>
+                    <ColumnDefinition/>
+                    <ColumnDefinition/>
+                    <ColumnDefinition/>
+                </Grid.ColumnDefinitions>
+
+                <Border Grid.Column="0" BorderBrush="#68A4C8" BorderThickness="2" Margin="5">
+                    <Image Source="{Binding Path=PhotoPath}" Margin="3" MaxHeight="60"/>
+                </Border>
+
+                <Grid Grid.Column="1">
+                    <Grid.RowDefinitions>
+                        <RowDefinition/>
+                        <RowDefinition/>
+                        <RowDefinition/>
+                    </Grid.RowDefinitions>
+
+                    <TextBlock Grid.Row="0" Text="{Binding Path=Nickname}" FontSize="14" FontWeight="SemiBold" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="5 0 0 0"/>
+                    <TextBlock Grid.Row="1" Text="{Binding Path=Name}" FontSize="12" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="5 0 0 0" TextWrapping="Wrap" TextAlignment="Left"/>
+                </Grid>
+
+                <Grid Grid.Column="2">
+                    <Grid.RowDefinitions>
+                        <RowDefinition/>
+                        <RowDefinition/>
+                        <RowDefinition/>
+                    </Grid.RowDefinitions>
+
+                    <Grid Grid.Row="0">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="0.2"/>
+                            <ColumnDefinition/>
+                        </Grid.ColumnDefinitions>
+
+                        <StackPanel Grid.Column="0" Grid.ColumnSpan="2" Orientation="Horizontal">
+                            <TextBlock Text="Страна: " FontSize="12" HorizontalAlignment="Left" VerticalAlignment="Center"/>
+                            <Image Source="{Binding Path=CountryIconPath}" MaxHeight="16" Margin="5 0 0 0"/>
+                            <TextBlock Text="{Binding Path=CountryName}" FontSize="12" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="5 0 0 0"/>
+                        </StackPanel>
+                    </Grid>
+
+                    <StackPanel Grid.Row="1" Orientation="Horizontal">
+                        <TextBlock Text="Дисциплина: " FontSize="12" HorizontalAlignment="Left" VerticalAlignment="Center"/>
+                        <TextBlock Text="{Binding Path=DisciplineName}" FontSize="12" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="5 0 0 0"/>
+                    </StackPanel>
+                </Grid>
+            </Grid>
+        </DataTemplate>
+
+        <DataTemplate x:Key="TeamsItemTemplate">
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition/>
+                    <ColumnDefinition />
+                    <ColumnDefinition/>
+                    <ColumnDefinition/>
+                </Grid.ColumnDefinitions>
+
+                <Border Grid.Column="0" BorderBrush="#68A4C8" BorderThickness="2" Margin="5">
+                    <Image Source="{Binding Path=LogoPath}" Margin="3"/>
+                </Border>
+
+                <Grid Grid.Column="1">
+                    <Grid.RowDefinitions>
+                        <RowDefinition/>
+                        <RowDefinition/>
+                        <RowDefinition/>
+                        <RowDefinition/>
+                    </Grid.RowDefinitions>
+
+                    <TextBlock Grid.Row="0" Text="{Binding Path=Name}" FontSize="14" FontWeight="SemiBold" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="5 0 0 0"/>
+
+                    <StackPanel Grid.Row="1" Orientation="Vertical">
+                        <TextBlock Text="Дата создания: " FontSize="12" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="5 0 0 0"/>
+                        <TextBlock Text="{Binding Path=FoundationDate}" FontSize="12" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="5 0 0 0"/>
+                    </StackPanel>
+
+                    <StackPanel Grid.Row="2" Orientation="Vertical">
+                        <TextBlock Text="Дата закрытия: " FontSize="12" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="5 0 0 0"/>
+                        <TextBlock Text="{Binding Path=DissolationDate}" FontSize="12" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="5 0 0 0"/>
+                    </StackPanel>
+                </Grid>
+
+                <Grid Grid.Column="2">
+                    <Grid.RowDefinitions>
+                        <RowDefinition/>
+                        <RowDefinition/>
+                        <RowDefinition/>
+                        <RowDefinition/>
+                    </Grid.RowDefinitions>
+
+                    <Grid Grid.Row="1">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="0.2"/>
+                            <ColumnDefinition/>
+                        </Grid.ColumnDefinitions>
+
+                        <StackPanel Grid.Column="0" Grid.ColumnSpan="2" Orientation="Horizontal">
+                            <TextBlock Text="Страна: " FontSize="12" HorizontalAlignment="Left" VerticalAlignment="Center"/>
+                            <Image Source="{Binding Path=CountryIconPath}" MaxHeight="16" Margin="5 0 0 0"/>
+                            <TextBlock Text="{Binding Path=CountryName}" FontSize="12" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="5 0 0 0"/>
+                        </StackPanel>
+                    </Grid>
+
+                    <StackPanel Grid.Row="2" Orientation="Horizontal">
+                        <TextBlock Text="Дисциплина:" FontSize="12" HorizontalAlignment="Left" VerticalAlignment="Center"/>
+                        <TextBlock Text="{Binding Path=DisciplineName}" FontSize="12" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="5 0 0 0"/>
+                    </StackPanel>
+                </Grid>
+            </Grid>
+        </DataTemplate>
+
+        <DataTemplate x:Key="TournamentsItemTemplate">
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition/>
+                    <ColumnDefinition Width="1.2*"/>
+                    <ColumnDefinition/>
+                    <ColumnDefinition/>
+                </Grid.ColumnDefinitions>
+                
+                <!-- Logo -->
+                <Border Grid.Column="0" BorderBrush="#68A4C8" BorderThickness="2" Margin="5">
+                    <Image Source="{Binding Path=LogoPath}" Margin="3"/>
+                </Border>
+
+                <!-- Name, Format, Discipline -->
+                <Grid Grid.Column="1">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="1.2*"/>
+                        <RowDefinition/>
+                        <RowDefinition/>
+                        <RowDefinition/>
+                    </Grid.RowDefinitions>
+
+                    <TextBlock Grid.Row="0" Text="{Binding Path=Name}" FontSize="14" FontWeight="SemiBold" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="5 0 0 0"/>
+                    <StackPanel Grid.Row="1" Orientation="Horizontal">
+                        <TextBlock Text="Формат: " FontSize="12" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="5 0 0 0"/>
+                        <TextBlock Text="{Binding Path=Format}" FontSize="12" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="5 0 0 0"/>
+                    </StackPanel>
+
+                    <StackPanel Grid.Row="2" Orientation="Horizontal">
+                        <TextBlock Text="Дисциплина: " FontSize="12" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="5 0 0 0"/>
+                        <TextBlock Text="{Binding Path=DisciplineName}" FontSize="12" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="5 0 0 0"/>
+                    </StackPanel>
+                </Grid>
+
+                <!-- Dates -->
+                <Grid Grid.Column="2">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="1.2*"/>
+                        <RowDefinition/>
+                        <RowDefinition/>
+                        <RowDefinition/>
+                    </Grid.RowDefinitions>
+
+                    <StackPanel Grid.Row="1" Orientation="Horizontal">
+                        <TextBlock Text="Дата открытия: " FontSize="12" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="5 0 0 0"/>
+                        <TextBlock Text="{Binding Path=DateStart}" FontSize="12" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="5 0 0 0"/>
+                    </StackPanel>
+
+                    <StackPanel Grid.Row="2" Orientation="Horizontal">
+                        <TextBlock Text="Дата закрытия: " FontSize="12" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="5 0 0 0"/>
+                        <TextBlock Text="{Binding Path=DateEnd}" FontSize="12" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="5 0 0 0"/>
+                    </StackPanel>
+                </Grid>
+            </Grid>
+        </DataTemplate>
+
+        <DataTemplate x:Key="TemplateSelector">
+            <ContentPresenter Content="{Binding}" Name="contentPresenter"/>
+
+            <DataTemplate.Triggers>
+                <DataTrigger Binding="{Binding ElementName=playerRB, Path=IsChecked}" Value="true">
+                    <Setter TargetName="contentPresenter" Property="ContentTemplate" Value="{StaticResource PlayersItemTemplate}"/>
+                </DataTrigger>
+                <DataTrigger Binding="{Binding ElementName=teamRB, Path=IsChecked}" Value="true">
+                    <Setter TargetName="contentPresenter" Property="ContentTemplate" Value="{StaticResource TeamsItemTemplate}"/>
+                </DataTrigger>
+                <DataTrigger Binding="{Binding ElementName=tournamentRB, Path=IsChecked}" Value="true">
+                    <Setter TargetName="contentPresenter" Property="ContentTemplate" Value="{StaticResource TournamentsItemTemplate}"/>
+                </DataTrigger>
+            </DataTemplate.Triggers>
+        </DataTemplate>
+    </Window.Resources>
+    
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="0.2*"/>
+            <RowDefinition Height="0.2*"/>
+            <RowDefinition Height="0.2*"/>
+            <RowDefinition/>
+        </Grid.RowDefinitions>
+
+        <!-- Title -->
+        <TextBlock Grid.Row="0" Text="Поиск" FontSize="24" FontWeight="SemiBold" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+        
+        <!-- RadioButtons -->
+        <Grid Grid.Row="1">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition/>
+                <ColumnDefinition/>
+                <ColumnDefinition/>
+            </Grid.ColumnDefinitions>
+
+            <StackPanel Grid.Column="0" Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Center">
+                <TextBlock Text="Игрок" FontSize="18" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                <RadioButton x:Name="playerRB" GroupName="Search" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="5 4 0 0" Checked="playerRB_Checked"/>
+            </StackPanel>
+
+            <StackPanel Grid.Column="1" Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Center">
+                <TextBlock Text="Команда" FontSize="18" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                <RadioButton x:Name="teamRB" GroupName="Search" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="5 4 0 0" Checked="teamRB_Checked"/>
+            </StackPanel>
+
+            <StackPanel Grid.Column="2" Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Center">
+                <TextBlock Text="Турнир" FontSize="18" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                <RadioButton x:Name="tournamentRB" GroupName="Search" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="5 4 0 0" Checked="tournamentRB_Checked"/>
+            </StackPanel>
+        </Grid>
+
+        <!-- Search -->
+        <StackPanel Grid.Row="2" Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Center">
+            <TextBlock Text="Поиск:" FontSize="14" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="0 0 5 0"/>
+            <TextBox x:Name="SearchTBox" MinWidth="300" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" MaxLength="30" KeyDown="Search_KeyDown"/>
+        </StackPanel>
+            
+        <!-- Listbox -->
+        <Border Grid.Row="3" BorderBrush="#68A4C8" BorderThickness="2" Margin="40 20 40 20">
+            <ListBox x:Name="SearchResultLB" Grid.Row="3" ItemTemplate="{StaticResource TemplateSelector}" HorizontalContentAlignment="Stretch" ScrollViewer.HorizontalScrollBarVisibility="Disabled" MouseDoubleClick="SearchResultLB_MouseDoubleClick"/>
+        </Border>
+    </Grid>
+</Window>

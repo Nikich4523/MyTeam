@@ -1,0 +1,84 @@
+﻿<Window x:Class="Курсовой_проект_3._1.Windows.AddPlayerInTeamWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Курсовой_проект_3._1.Windows"
+        mc:Ignorable="d"
+        Title="AddPlayerInTeamWindow" Height="450" Width="600">
+    <Window.Resources>
+        <DataTemplate x:Key="PlayersItemTemplate">
+            <Grid MinHeight="100">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="0.4"/>
+                    <ColumnDefinition/>
+                    <ColumnDefinition/>
+                    <ColumnDefinition/>
+                </Grid.ColumnDefinitions>
+
+                <Border Grid.Column="0" BorderBrush="#68A4C8" BorderThickness="2" Margin="5">
+                    <Image Source="{Binding Path=PhotoPath}" Margin="3"/>
+                </Border>
+
+                <Grid Grid.Column="1">
+                    <Grid.RowDefinitions>
+                        <RowDefinition/>
+                        <RowDefinition/>
+                        <RowDefinition/>
+                    </Grid.RowDefinitions>
+
+                    <TextBlock Grid.Row="0" Text="{Binding Path=Nickname}" FontSize="14" FontWeight="SemiBold" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="5 0 0 0"/>
+                    <TextBlock Grid.Row="1" Text="{Binding Path=Name}" FontSize="12" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="5 0 0 0"/>
+                </Grid>
+
+                <Grid Grid.Column="2">
+                    <Grid.RowDefinitions>
+                        <RowDefinition/>
+                        <RowDefinition/>
+                        <RowDefinition/>
+                    </Grid.RowDefinitions>
+
+                    <Grid Grid.Row="0">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="0.2"/>
+                            <ColumnDefinition/>
+                        </Grid.ColumnDefinitions>
+
+                        <StackPanel Grid.Column="0" Grid.ColumnSpan="2" Orientation="Horizontal">
+                            <TextBlock Text="Страна: " FontSize="12" HorizontalAlignment="Left" VerticalAlignment="Center"/>
+                            <Image Source="{Binding Path=CountryIconPath}" MaxHeight="16" Margin="5 0 0 0"/>
+                            <TextBlock Text="{Binding Path=CountryName}" FontSize="12" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="5 0 0 0"/>
+                        </StackPanel>
+                    </Grid>
+
+                    <StackPanel Grid.Row="1" Orientation="Horizontal">
+                        <TextBlock Text="Дисциплина: " FontSize="12" HorizontalAlignment="Left" VerticalAlignment="Center"/>
+                        <TextBlock Text="{Binding Path=DisciplineName}" FontSize="12" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="5 0 0 0"/>
+                    </StackPanel>
+                </Grid>
+            </Grid>
+        </DataTemplate>
+    </Window.Resources>
+    
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="0.2*"/>
+            <RowDefinition Height="0.2*"/>
+            <RowDefinition/>
+        </Grid.RowDefinitions>
+
+        <!-- Title -->
+        <TextBlock Grid.Row="0" Text="Поиск игрока" FontSize="24" FontWeight="SemiBold" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+
+        <!-- Search -->
+        <StackPanel Grid.Row="1" Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Center">
+            <TextBlock Text="Поиск:" FontSize="14" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="0 0 5 0"/>
+            <TextBox x:Name="SearchTBox" MinWidth="300" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" MaxLength="30" KeyDown="Search_KeyDown"/>
+        </StackPanel>
+
+        <!-- Listbox -->
+        <Border Grid.Row="2" BorderBrush="#68A4C8" BorderThickness="2" Margin="40 20 40 20">
+            <ListBox x:Name="SearchResultLB" ItemTemplate="{StaticResource PlayersItemTemplate}" MouseDoubleClick="SearchResultLB_MouseDoubleClick"/>
+        </Border>
+    </Grid>
+</Window>

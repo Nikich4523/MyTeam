@@ -13,5 +13,7 @@ namespace Курсовой_проект_3._1
     /// </summary>
     public partial class App : Application
     {
+        public static int UserId {get; set;}
+        public static int prevWindowId { get; set; }
     }
 }

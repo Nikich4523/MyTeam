@@ -1,0 +1,119 @@
+﻿<Window x:Class="Курсовой_проект_3._1.Windows.MatchWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Курсовой_проект_3._1.Windows"
+        mc:Ignorable="d"
+        Title="MatchWindow" Height="300" Width="450" WindowStartupLocation="CenterScreen" ResizeMode="NoResize">
+    <Window.Resources>
+        <!-- Buttom style -->
+        <Style TargetType="Button">
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="Button">
+                        <Border CornerRadius="8"
+                                Background="{TemplateBinding Background}" x:Name="ButtonBorder">
+
+                            <ContentPresenter HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
+                                              VerticalAlignment="{TemplateBinding VerticalContentAlignment}"/>
+                        </Border>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsPressed" Value="True">
+                                <Setter Property="Background" TargetName="ButtonBorder">
+                                    <Setter.Value>
+                                        <RadialGradientBrush GradientOrigin="0.496,1.052">
+                                            <RadialGradientBrush.RelativeTransform>
+                                                <TransformGroup>
+                                                    <ScaleTransform CenterX="0.5" CenterY="0.5" ScaleX="1.5" ScaleY="1.5"/>
+                                                    <TranslateTransform X="0.02" Y="0.3"/>
+                                                </TransformGroup>
+                                            </RadialGradientBrush.RelativeTransform>
+                                            <GradientStop Color="#00000000" Offset="1"/>
+                                            <GradientStop Color="#FF303030" Offset="0.3"/>
+                                        </RadialGradientBrush>
+                                    </Setter.Value>
+                                </Setter>
+                            </Trigger>
+
+                            <Trigger Property="IsMouseOver" Value="True">
+                                <Setter Property="Background" Value="WhiteSmoke" TargetName="ButtonBorder">
+                                </Setter>
+                            </Trigger>
+
+                            <Trigger Property="IsEnabled" Value="False">
+                                <Setter Property="Background" TargetName="ButtonBorder">
+                                    <Setter.Value>
+                                        <RadialGradientBrush GradientOrigin="0.496,1.052">
+                                            <RadialGradientBrush.RelativeTransform>
+                                                <TransformGroup>
+                                                    <ScaleTransform CenterX="0.5" CenterY="0.5" ScaleX="1.5" ScaleY="1.5"/>
+                                                    <TranslateTransform X="0.02" Y="0.3"/>
+                                                </TransformGroup>
+                                            </RadialGradientBrush.RelativeTransform>
+                                            <GradientStop Color="#00000000" Offset="1"/>
+                                            <GradientStop Color="#FF303030" Offset="0.3"/>
+                                        </RadialGradientBrush>
+                                    </Setter.Value>
+                                </Setter>
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+    </Window.Resources>
+    
+    <Grid Background="White" Margin="5 0 0 0">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="6*"/>
+            <ColumnDefinition/>
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition/>
+            <RowDefinition/>
+            <RowDefinition/>
+            <RowDefinition/>
+        </Grid.RowDefinitions>
+
+        <TextBlock Grid.Column="0" Grid.Row="0" Text="Победитель не определен" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="18"/>
+        <RadioButton x:Name="NoneTeamRB" GroupName="Winner" Grid.Column="1" Grid.Row="0" HorizontalAlignment="Center" VerticalAlignment="Center" IsChecked="True"/>
+
+        <!-- Frst -->
+        <Border Grid.Column="0" Grid.Row="1" BorderBrush="Black" BorderThickness="2 2 2 1" Background="White" PreviewMouseDown="TeamTBlock_MouseDown">
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="3*"/>
+                    <ColumnDefinition/>
+                </Grid.ColumnDefinitions>
+
+                <TextBlock x:Name="FrstTeamTBlock" Grid.Column="0" Text="Команда 1" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="18" Cursor="Hand"/>
+
+                <Border Grid.Column="1" BorderBrush="Black" BorderThickness="2 0 0 0">
+                    <TextBox x:Name="FrstTeamScoreTBox" Grid.Column="1" Grid.Row="1" Text="0" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" FontSize="18" MaxLength="2"/>
+                </Border>
+            </Grid>
+        </Border>
+        <RadioButton x:Name="FrstTeamRB" GroupName="Winner" Grid.Column="1" Grid.Row="1" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+
+        <!-- Scnd -->
+        <Border Grid.Column="0" Grid.Row="2" BorderBrush="Black" BorderThickness="2 1 2 2" Background="White" PreviewMouseDown="TeamTBlock_MouseDown">
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="3*"/>
+                    <ColumnDefinition/>
+                </Grid.ColumnDefinitions>
+
+                <TextBlock x:Name="ScndTeamTBlock" Grid.Column="0" Text="Команда 2" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="18" Cursor="Hand"/>
+
+                <Border Grid.Column="1" BorderBrush="Black" BorderThickness="2 0 0 0">
+                    <TextBox x:Name="ScndTeamScoreTBox" Grid.Column="1" Grid.Row="1" Text="0" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" FontSize="18" MaxLength="2"/>
+                </Border>
+            </Grid>
+        </Border>
+        <RadioButton x:Name="ScndTeamRB" GroupName="Winner" Grid.Column="1" Grid.Row="2" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+        
+        <!-- Btns -->
+        <Button x:Name="AcceptBtn" Grid.Column="0" Grid.Row="3" Content="Принять" FontSize="18" Margin="50 10 50 10" Click="AcceptBtn_Click"/>
+    </Grid>
+</Window>

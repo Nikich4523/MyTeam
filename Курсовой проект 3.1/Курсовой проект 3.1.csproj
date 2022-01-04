@@ -35,9 +35,18 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.6.2.0\lib\net45\EntityFramework.dll</HintPath>
+    </Reference>
+    <Reference Include="EntityFramework.SqlServer, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.6.2.0\lib\net45\EntityFramework.SqlServer.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Configuration" />
     <Reference Include="System.Data" />
+    <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.Security" />
     <Reference Include="System.Xml" />
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="System.Core" />
@@ -56,31 +65,130 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
-    <Compile Include="ApplicationWindow.xaml.cs">
+    <Compile Include="Achievements.cs">
+      <DependentUpon>MyTeam.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Countries.cs">
+      <DependentUpon>MyTeam.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Disciplines.cs">
+      <DependentUpon>MyTeam.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Func.cs" />
+    <Compile Include="Matches.cs">
+      <DependentUpon>MyTeam.tt</DependentUpon>
+    </Compile>
+    <Compile Include="MyTeam.Context.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>MyTeam.Context.tt</DependentUpon>
+    </Compile>
+    <Compile Include="MyTeam.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>MyTeam.tt</DependentUpon>
+    </Compile>
+    <Compile Include="MyTeam.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>MyTeam.edmx</DependentUpon>
+    </Compile>
+    <Compile Include="PlayerApps.cs">
+      <DependentUpon>MyTeam.tt</DependentUpon>
+    </Compile>
+    <Compile Include="sysdiagrams.cs">
+      <DependentUpon>MyTeam.tt</DependentUpon>
+    </Compile>
+    <Compile Include="TeamApps.cs">
+      <DependentUpon>MyTeam.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Teams.cs">
+      <DependentUpon>MyTeam.tt</DependentUpon>
+    </Compile>
+    <Compile Include="TeamsUsers.cs">
+      <DependentUpon>MyTeam.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Test.cs" />
+    <Compile Include="TournamentFormats.cs">
+      <DependentUpon>MyTeam.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Tournaments.cs">
+      <DependentUpon>MyTeam.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Users.cs">
+      <DependentUpon>MyTeam.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Windows\AddPlayerInTeamWindow.xaml.cs">
+      <DependentUpon>AddPlayerInTeamWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Windows\ApplicationWindow.xaml.cs">
       <DependentUpon>ApplicationWindow.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Authorization.xaml.cs">
+    <Compile Include="Windows\Authorization.xaml.cs">
       <DependentUpon>Authorization.xaml</DependentUpon>
     </Compile>
-    <Compile Include="RegistrationWindow.xaml.cs">
+    <Compile Include="Windows\CreateTeamWindow.xaml.cs">
+      <DependentUpon>CreateTeamWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Windows\RegistrationWindow.xaml.cs">
       <DependentUpon>RegistrationWindow.xaml</DependentUpon>
     </Compile>
-    <Compile Include="SQL.cs" />
-    <Compile Include="TeamProfileWindow.xaml.cs">
+    <Compile Include="Windows\SearchWindow.xaml.cs">
+      <DependentUpon>SearchWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Windows\TeamApplicationAddWindow.xaml.cs">
+      <DependentUpon>TeamApplicationAddWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Windows\TeamProfileWindow.xaml.cs">
       <DependentUpon>TeamProfileWindow.xaml</DependentUpon>
     </Compile>
-    <Compile Include="TournamentWindow.xaml.cs">
+    <Compile Include="Windows\TournamentWindow.xaml.cs">
       <DependentUpon>TournamentWindow.xaml</DependentUpon>
     </Compile>
-    <Page Include="ApplicationWindow.xaml">
+    <Compile Include="UserControls\LimitedTextBlock.xaml.cs">
+      <DependentUpon>LimitedTextBlock.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="UserControls\MatchControl.xaml.cs">
+      <DependentUpon>MatchControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Windows\CreateTournamentWindow.xaml.cs">
+      <DependentUpon>CreateTournamentWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Windows\MatchWindow.xaml.cs">
+      <DependentUpon>MatchWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Windows\PlayerApplicationAddWindow.xaml.cs">
+      <DependentUpon>PlayerApplicationAddWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Windows\PlayerProfileSettingsWindow.xaml.cs">
+      <DependentUpon>PlayerProfileSettingsWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Windows\ResultAddWindow.xaml.cs">
+      <DependentUpon>ResultAddWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Windows\SelectTeamsInMatchWindow.xaml.cs">
+      <DependentUpon>SelectTeamsInMatchWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Windows\TeamProfileSettingsWindow.xaml.cs">
+      <DependentUpon>TeamProfileSettingsWindow.xaml</DependentUpon>
+    </Compile>
+    <Page Include="Windows\AddPlayerInTeamWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Authorization.xaml">
+    <Page Include="Windows\ApplicationWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="MainWindow.xaml">
+    <Page Include="Windows\Authorization.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Windows\CreateTeamWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Windows\MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
@@ -88,19 +196,63 @@
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="MainWindow.xaml.cs">
+    <Compile Include="Windows\MainWindow.xaml.cs">
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
-    <Page Include="RegistrationWindow.xaml">
+    <Page Include="Windows\RegistrationWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="TeamProfileWindow.xaml">
+    <Page Include="Windows\SearchWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="TournamentWindow.xaml">
+    <Page Include="Windows\TeamApplicationAddWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Windows\TeamProfileWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Windows\TournamentWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="UserControls\LimitedTextBlock.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="UserControls\MatchControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Windows\CreateTournamentWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Windows\MatchWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Windows\PlayerApplicationAddWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Windows\PlayerProfileSettingsWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Windows\ResultAddWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Windows\SelectTeamsInMatchWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Windows\TeamProfileSettingsWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -123,6 +275,14 @@
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
+    <EntityDeploy Include="MyTeam.edmx">
+      <Generator>EntityModelCodeGenerator</Generator>
+      <LastGenOutput>MyTeam.Designer.cs</LastGenOutput>
+    </EntityDeploy>
+    <None Include="MyTeam.edmx.diagram">
+      <DependentUpon>MyTeam.edmx</DependentUpon>
+    </None>
+    <None Include="packages.config" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
@@ -130,6 +290,301 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="img\countrys - 24\Abkhazia.png" />
+    <Resource Include="img\countrys - 24\Afghanistan.png" />
+    <Resource Include="img\countrys - 24\Aland.png" />
+    <Resource Include="img\countrys - 24\Albania.png" />
+    <Resource Include="img\countrys - 24\Algeria.png" />
+    <Resource Include="img\countrys - 24\American-Samoa.png" />
+    <Resource Include="img\countrys - 24\Andorra.png" />
+    <Resource Include="img\countrys - 24\Angola.png" />
+    <Resource Include="img\countrys - 24\Anguilla.png" />
+    <Resource Include="img\countrys - 24\Antarctica.png" />
+    <Resource Include="img\countrys - 24\Antigua-and-Barbuda.png" />
+    <Resource Include="img\countrys - 24\Argentina.png" />
+    <Resource Include="img\countrys - 24\Armenia.png" />
+    <Resource Include="img\countrys - 24\Aruba.png" />
+    <Resource Include="img\countrys - 24\Australia.png" />
+    <Resource Include="img\countrys - 24\Austria.png" />
+    <Resource Include="img\countrys - 24\Azerbaijan.png" />
+    <Resource Include="img\countrys - 24\Bahamas.png" />
+    <Resource Include="img\countrys - 24\Bahrain.png" />
+    <Resource Include="img\countrys - 24\Bangladesh.png" />
+    <Resource Include="img\countrys - 24\Barbados.png" />
+    <Resource Include="img\countrys - 24\Basque-Country.png" />
+    <Resource Include="img\countrys - 24\Belarus.png" />
+    <Resource Include="img\countrys - 24\Belgium.png" />
+    <Resource Include="img\countrys - 24\Belize.png" />
+    <Resource Include="img\countrys - 24\Benin.png" />
+    <Resource Include="img\countrys - 24\Bermuda.png" />
+    <Resource Include="img\countrys - 24\Bhutan.png" />
+    <Resource Include="img\countrys - 24\Bolivia.png" />
+    <Resource Include="img\countrys - 24\Bosnia-and-Herzegovina.png" />
+    <Resource Include="img\countrys - 24\Botswana.png" />
+    <Resource Include="img\countrys - 24\Brazil.png" />
+    <Resource Include="img\countrys - 24\British-Antarctic-Territory.png" />
+    <Resource Include="img\countrys - 24\British-Virgin-Islands.png" />
+    <Resource Include="img\countrys - 24\Brunei.png" />
+    <Resource Include="img\countrys - 24\Bulgaria.png" />
+    <Resource Include="img\countrys - 24\Burkina-Faso.png" />
+    <Resource Include="img\countrys - 24\Burundi.png" />
+    <Resource Include="img\countrys - 24\Cambodia.png" />
+    <Resource Include="img\countrys - 24\Cameroon.png" />
+    <Resource Include="img\countrys - 24\Canada.png" />
+    <Resource Include="img\countrys - 24\Canary-Islands.png" />
+    <Resource Include="img\countrys - 24\Cape-Verde.png" />
+    <Resource Include="img\countrys - 24\Cayman-Islands.png" />
+    <Resource Include="img\countrys - 24\Central-African-Republic.png" />
+    <Resource Include="img\countrys - 24\Chad.png" />
+    <Resource Include="img\countrys - 24\Chile.png" />
+    <Resource Include="img\countrys - 24\China.png" />
+    <Resource Include="img\countrys - 24\Christmas-Island.png" />
+    <Resource Include="img\countrys - 24\Cocos-Keeling-Islands.png" />
+    <Resource Include="img\countrys - 24\Colombia.png" />
+    <Resource Include="img\countrys - 24\Commonwealth.png" />
+    <Resource Include="img\countrys - 24\Comoros.png" />
+    <Resource Include="img\countrys - 24\Cook-Islands.png" />
+    <Resource Include="img\countrys - 24\Costa-Rica.png" />
+    <Resource Include="img\countrys - 24\Cote-dIvoire.png" />
+    <Resource Include="img\countrys - 24\Croatia.png" />
+    <Resource Include="img\countrys - 24\Cuba.png" />
+    <Resource Include="img\countrys - 24\Curacao.png" />
+    <Resource Include="img\countrys - 24\Cyprus.png" />
+    <Resource Include="img\countrys - 24\Czech-Republic.png" />
+    <Resource Include="img\countrys - 24\Democratic-Republic-of-the-Congo.png" />
+    <Resource Include="img\countrys - 24\Denmark.png" />
+    <Resource Include="img\countrys - 24\Djibouti.png" />
+    <Resource Include="img\countrys - 24\Dominica.png" />
+    <Resource Include="img\countrys - 24\Dominican-Republic.png" />
+    <Resource Include="img\countrys - 24\East-Timor.png" />
+    <Resource Include="img\countrys - 24\Ecuador.png" />
+    <Resource Include="img\countrys - 24\Egypt.png" />
+    <Resource Include="img\countrys - 24\El-Salvador.png" />
+    <Resource Include="img\countrys - 24\England.png" />
+    <Resource Include="img\countrys - 24\Equatorial-Guinea.png" />
+    <Resource Include="img\countrys - 24\Eritrea.png" />
+    <Resource Include="img\countrys - 24\Estonia.png" />
+    <Resource Include="img\countrys - 24\Ethiopia.png" />
+    <Resource Include="img\countrys - 24\European-Union.png" />
+    <Resource Include="img\countrys - 24\Falkland-Islands.png" />
+    <Resource Include="img\countrys - 24\Faroes.png" />
+    <Resource Include="img\countrys - 24\Fiji.png" />
+    <Resource Include="img\countrys - 24\Finland.png" />
+    <Resource Include="img\countrys - 24\France.png" />
+    <Resource Include="img\countrys - 24\French-Polynesia.png" />
+    <Resource Include="img\countrys - 24\French-Southern-Territories.png" />
+    <Resource Include="img\countrys - 24\Gabon.png" />
+    <Resource Include="img\countrys - 24\Gambia.png" />
+    <Resource Include="img\countrys - 24\Georgia.png" />
+    <Resource Include="img\countrys - 24\Germany.png" />
+    <Resource Include="img\countrys - 24\Ghana.png" />
+    <Resource Include="img\countrys - 24\Gibraltar.png" />
+    <Resource Include="img\countrys - 24\GoSquared.png" />
+    <Resource Include="img\countrys - 24\Greece.png" />
+    <Resource Include="img\countrys - 24\Greenland.png" />
+    <Resource Include="img\countrys - 24\Grenada.png" />
+    <Resource Include="img\countrys - 24\Guam.png" />
+    <Resource Include="img\countrys - 24\Guatemala.png" />
+    <Resource Include="img\countrys - 24\Guernsey.png" />
+    <Resource Include="img\countrys - 24\Guinea-Bissau.png" />
+    <Resource Include="img\countrys - 24\Guinea.png" />
+    <Resource Include="img\countrys - 24\Guyana.png" />
+    <Resource Include="img\countrys - 24\Haiti.png" />
+    <Resource Include="img\countrys - 24\Honduras.png" />
+    <Resource Include="img\countrys - 24\Hong-Kong.png" />
+    <Resource Include="img\countrys - 24\Hungary.png" />
+    <Resource Include="img\countrys - 24\Iceland.png" />
+    <Resource Include="img\countrys - 24\India.png" />
+    <Resource Include="img\countrys - 24\Indonesia.png" />
+    <Resource Include="img\countrys - 24\Iran.png" />
+    <Resource Include="img\countrys - 24\Iraq.png" />
+    <Resource Include="img\countrys - 24\Ireland.png" />
+    <Resource Include="img\countrys - 24\Isle-of-Man.png" />
+    <Resource Include="img\countrys - 24\Israel.png" />
+    <Resource Include="img\countrys - 24\Italy.png" />
+    <Resource Include="img\countrys - 24\Jamaica.png" />
+    <Resource Include="img\countrys - 24\Japan.png" />
+    <Resource Include="img\countrys - 24\Jersey.png" />
+    <Resource Include="img\countrys - 24\Jordan.png" />
+    <Resource Include="img\countrys - 24\Kazakhstan.png" />
+    <Resource Include="img\countrys - 24\Kenya.png" />
+    <Resource Include="img\countrys - 24\Kiribati.png" />
+    <Resource Include="img\countrys - 24\Kosovo.png" />
+    <Resource Include="img\countrys - 24\Kuwait.png" />
+    <Resource Include="img\countrys - 24\Kyrgyzstan.png" />
+    <Resource Include="img\countrys - 24\Laos.png" />
+    <Resource Include="img\countrys - 24\Latvia.png" />
+    <Resource Include="img\countrys - 24\Lebanon.png" />
+    <Resource Include="img\countrys - 24\Lesotho.png" />
+    <Resource Include="img\countrys - 24\Liberia.png" />
+    <Resource Include="img\countrys - 24\Libya.png" />
+    <Resource Include="img\countrys - 24\Liechtenstein.png" />
+    <Resource Include="img\countrys - 24\Lithuania.png" />
+    <Resource Include="img\countrys - 24\Luxembourg.png" />
+    <Resource Include="img\countrys - 24\Macau.png" />
+    <Resource Include="img\countrys - 24\Macedonia.png" />
+    <Resource Include="img\countrys - 24\Madagascar.png" />
+    <Resource Include="img\countrys - 24\Malawi.png" />
+    <Resource Include="img\countrys - 24\Malaysia.png" />
+    <Resource Include="img\countrys - 24\Maldives.png" />
+    <Resource Include="img\countrys - 24\Mali.png" />
+    <Resource Include="img\countrys - 24\Malta.png" />
+    <Resource Include="img\countrys - 24\Mars.png" />
+    <Resource Include="img\countrys - 24\Marshall-Islands.png" />
+    <Resource Include="img\countrys - 24\Martinique.png" />
+    <Resource Include="img\countrys - 24\Mauritania.png" />
+    <Resource Include="img\countrys - 24\Mauritius.png" />
+    <Resource Include="img\countrys - 24\Mayotte.png" />
+    <Resource Include="img\countrys - 24\Mexico.png" />
+    <Resource Include="img\countrys - 24\Micronesia.png" />
+    <Resource Include="img\countrys - 24\Moldova.png" />
+    <Resource Include="img\countrys - 24\Monaco.png" />
+    <Resource Include="img\countrys - 24\Mongolia.png" />
+    <Resource Include="img\countrys - 24\Montenegro.png" />
+    <Resource Include="img\countrys - 24\Montserrat.png" />
+    <Resource Include="img\countrys - 24\Morocco.png" />
+    <Resource Include="img\countrys - 24\Mozambique.png" />
+    <Resource Include="img\countrys - 24\Myanmar.png" />
+    <Resource Include="img\countrys - 24\Nagorno-Karabakh.png" />
+    <Resource Include="img\countrys - 24\Namibia.png" />
+    <Resource Include="img\countrys - 24\NATO.png" />
+    <Resource Include="img\countrys - 24\Nauru.png" />
+    <Resource Include="img\countrys - 24\Nepal.png" />
+    <Resource Include="img\countrys - 24\Netherlands-Antilles.png" />
+    <Resource Include="img\countrys - 24\Netherlands.png" />
+    <Resource Include="img\countrys - 24\New-Caledonia.png" />
+    <Resource Include="img\countrys - 24\New-Zealand.png" />
+    <Resource Include="img\countrys - 24\Nicaragua.png" />
+    <Resource Include="img\countrys - 24\Niger.png" />
+    <Resource Include="img\countrys - 24\Nigeria.png" />
+    <Resource Include="img\countrys - 24\Niue.png" />
+    <Resource Include="img\countrys - 24\Norfolk-Island.png" />
+    <Resource Include="img\countrys - 24\North-Korea.png" />
+    <Resource Include="img\countrys - 24\Northern-Cyprus.png" />
+    <Resource Include="img\countrys - 24\Northern-Mariana-Islands.png" />
+    <Resource Include="img\countrys - 24\Norway.png" />
+    <Resource Include="img\countrys - 24\Olympics.png" />
+    <Resource Include="img\countrys - 24\Oman.png" />
+    <Resource Include="img\countrys - 24\Pakistan.png" />
+    <Resource Include="img\countrys - 24\Palau.png" />
+    <Resource Include="img\countrys - 24\Palestine.png" />
+    <Resource Include="img\countrys - 24\Panama.png" />
+    <Resource Include="img\countrys - 24\Papua-New-Guinea.png" />
+    <Resource Include="img\countrys - 24\Paraguay.png" />
+    <Resource Include="img\countrys - 24\Peru.png" />
+    <Resource Include="img\countrys - 24\Philippines.png" />
+    <Resource Include="img\countrys - 24\Pitcairn-Islands.png" />
+    <Resource Include="img\countrys - 24\Poland.png" />
+    <Resource Include="img\countrys - 24\Portugal.png" />
+    <Resource Include="img\countrys - 24\Puerto-Rico.png" />
+    <Resource Include="img\countrys - 24\Qatar.png" />
+    <Resource Include="img\countrys - 24\Red-Cross.png" />
+    <Resource Include="img\countrys - 24\Republic-of-the-Congo.png" />
+    <Resource Include="img\countrys - 24\Romania.png" />
+    <Resource Include="img\countrys - 24\Russia.png" />
+    <Resource Include="img\countrys - 24\Rwanda.png" />
+    <Resource Include="img\countrys - 24\Saint-Barthelemy.png" />
+    <Resource Include="img\countrys - 24\Saint-Helena.png" />
+    <Resource Include="img\countrys - 24\Saint-Kitts-and-Nevis.png" />
+    <Resource Include="img\countrys - 24\Saint-Lucia.png" />
+    <Resource Include="img\countrys - 24\Saint-Martin.png" />
+    <Resource Include="img\countrys - 24\Saint-Vincent-and-the-Grenadines.png" />
+    <Resource Include="img\countrys - 24\Samoa.png" />
+    <Resource Include="img\countrys - 24\San-Marino.png" />
+    <Resource Include="img\countrys - 24\Sao-Tome-and-Principe.png" />
+    <Resource Include="img\countrys - 24\Saudi-Arabia.png" />
+    <Resource Include="img\countrys - 24\Scotland.png" />
+    <Resource Include="img\countrys - 24\Senegal.png" />
+    <Resource Include="img\countrys - 24\Serbia.png" />
+    <Resource Include="img\countrys - 24\Seychelles.png" />
+    <Resource Include="img\countrys - 24\Sierra-Leone.png" />
+    <Resource Include="img\countrys - 24\Singapore.png" />
+    <Resource Include="img\countrys - 24\Slovakia.png" />
+    <Resource Include="img\countrys - 24\Slovenia.png" />
+    <Resource Include="img\countrys - 24\Solomon-Islands.png" />
+    <Resource Include="img\countrys - 24\Somalia.png" />
+    <Resource Include="img\countrys - 24\Somaliland.png" />
+    <Resource Include="img\countrys - 24\South-Africa.png" />
+    <Resource Include="img\countrys - 24\South-Georgia-and-the-South-Sandwich-Islands.png" />
+    <Resource Include="img\countrys - 24\South-Korea.png" />
+    <Resource Include="img\countrys - 24\South-Ossetia.png" />
+    <Resource Include="img\countrys - 24\South-Sudan.png" />
+    <Resource Include="img\countrys - 24\Spain.png" />
+    <Resource Include="img\countrys - 24\Sri-Lanka.png" />
+    <Resource Include="img\countrys - 24\Sudan.png" />
+    <Resource Include="img\countrys - 24\Suriname.png" />
+    <Resource Include="img\countrys - 24\Swaziland.png" />
+    <Resource Include="img\countrys - 24\Sweden.png" />
+    <Resource Include="img\countrys - 24\Switzerland.png" />
+    <Resource Include="img\countrys - 24\Syria.png" />
+    <Resource Include="img\countrys - 24\Taiwan.png" />
+    <Resource Include="img\countrys - 24\Tajikistan.png" />
+    <Resource Include="img\countrys - 24\Tanzania.png" />
+    <Resource Include="img\countrys - 24\Thailand.png" />
+    <Resource Include="img\countrys - 24\Togo.png" />
+    <Resource Include="img\countrys - 24\Tokelau.png" />
+    <Resource Include="img\countrys - 24\Tonga.png" />
+    <Resource Include="img\countrys - 24\Trinidad-and-Tobago.png" />
+    <Resource Include="img\countrys - 24\Tunisia.png" />
+    <Resource Include="img\countrys - 24\Turkey.png" />
+    <Resource Include="img\countrys - 24\Turkmenistan.png" />
+    <Resource Include="img\countrys - 24\Turks-and-Caicos-Islands.png" />
+    <Resource Include="img\countrys - 24\Tuvalu.png" />
+    <Resource Include="img\countrys - 24\Uganda.png" />
+    <Resource Include="img\countrys - 24\Ukraine.png" />
+    <Resource Include="img\countrys - 24\United-Arab-Emirates.png" />
+    <Resource Include="img\countrys - 24\United-Kingdom.png" />
+    <Resource Include="img\countrys - 24\United-Nations.png" />
+    <Resource Include="img\countrys - 24\United-States.png" />
+    <Resource Include="img\countrys - 24\Unknown.png" />
+    <Resource Include="img\countrys - 24\Uruguay.png" />
+    <Resource Include="img\countrys - 24\US-Virgin-Islands.png" />
+    <Resource Include="img\countrys - 24\Uzbekistan.png" />
+    <Resource Include="img\countrys - 24\Vanuatu.png" />
+    <Resource Include="img\countrys - 24\Vatican-City.png" />
+    <Resource Include="img\countrys - 24\Venezuela.png" />
+    <Resource Include="img\countrys - 24\Vietnam.png" />
+    <Resource Include="img\countrys - 24\Wales.png" />
+    <Resource Include="img\countrys - 24\Wallis-And-Futuna.png" />
+    <Resource Include="img\countrys - 24\Western-Sahara.png" />
+    <Resource Include="img\countrys - 24\Yemen.png" />
+    <Resource Include="img\countrys - 24\Zambia.png" />
+    <Resource Include="img\countrys - 24\Zimbabwe.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="img\countrys - 24\_unknown.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="img\Default\settings.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="img\Default\addPlayer.png" />
+    <Resource Include="img\Default\log-out.png" />
+    <Resource Include="img\Default\cupBronze.png" />
+    <Resource Include="img\Default\cupGold.png" />
+    <Resource Include="img\Default\cupSilver.png" />
+    <Resource Include="img\Default\discipline.png" />
+    <Resource Include="img\games\cs.png" />
+    <Resource Include="img\games\dota.png" />
+    <Resource Include="img\games\overwatch.png" />
+    <Resource Include="img\games\valorant.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="MyTeam.Context.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>MyTeam.edmx</DependentUpon>
+      <LastGenOutput>MyTeam.Context.cs</LastGenOutput>
+    </Content>
+    <Content Include="MyTeam.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>MyTeam.edmx</DependentUpon>
+      <LastGenOutput>MyTeam.cs</LastGenOutput>
+    </Content>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
